@@ -1,0 +1,27 @@
+seed: 42                 # drives the train/eval split
+eval_fraction: 0.2       # share of GROUPS (paper / session) held out for evaluation
+raw_dir: data/raw        # downloads are cached here
+annotations_dir: annotations
+
+sources:
+  emps:
+    enabled: true
+    url: https://github.com/by256/emps/archive/HEAD.zip
+    path: null           # set to a local folder with images/ segmaps/ metadata.csv to skip the download
+    limit: null          # null = all 465 images
+  hrtem:
+    enabled: true
+    nersc_url: https://portal.nersc.gov/project/m3795/hrtem-generalization
+    metadata_csv: hrtem_metadata.csv
+    downsample: 4        # raw 4096x4096 float32 (65 MB each) -> 1024x1024; pixel size x4
+    limit: 100           # deterministic hash-ordered subset; null = all 407 images (~26 GB download)
+    keep_raw: false      # delete each raw .dm3 after it is processed (disk)
+  co3o4:
+    enabled: true
+    images_url: https://zenodo.org/api/records/14927582/files/training_images.h5/content
+    labels_url: https://zenodo.org/api/records/14927582/files/training_labels.h5/content
+    images_key: images
+    labels_key: labels
+    particle_channel: 1  # of the 2 one-hot channels (mean 0.28 = particle, 0.72 = background)
+    limit: null          # null = all 256 images
+    keep_raw: false      # delete the HDF5 files after loading (disk)
