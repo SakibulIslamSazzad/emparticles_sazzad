@@ -4,7 +4,7 @@ EMA 5937 *AI/ML for Materials Science*, Project A, **Part 1 (ETL)**. Author: Sak
 (UCF, sakibsazzad[at]ucf[dot]edu).
 
 ```bash
-git clone https://github.com/SakibulIslamSazzad/emparticles && cd emparticles && just
+git clone https://github.com/SakibulIslamSazzad/emparticles_sazzad && cd emparticles_sazzad && just
 # or: tar xzvf emparticles.tar.gz && cd emparticles && just
 ```
 
