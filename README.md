@@ -10,7 +10,7 @@ git clone https://github.com/SakibulIslamSazzad/emparticles_sazzad && cd emparti
 
 `just` runs `Justfile → Containerfile → Makefile → src/emparticles/*.py → data/dataset.db`, then builds
 the preliminary figures (`figures/*.png`) and `results/summary.json`. Without podman:
-`uv sync && make all`. The default build downloads about 9 GB (see §3) and needs network access.
+`uv sync && make all`. The default build downloads about 4 GB (see §3) and needs network access.
 
 ---
 
@@ -67,7 +67,7 @@ erDiagram
 ## 2. How to run, configure
 
 `config.yaml` controls everything: seed, eval fraction, per-source switches, the HRTEM subset size
-(`limit`), downsampling (`downsample: 4`), and `keep_raw`. To change the subset edit `limit` (use `null`
+(`limit`, default 30), downsampling (`downsample: 4`), and `keep_raw`. To change the subset edit `limit` (use `null`
 for all 407 HRTEM images, about 26 GB of downloads).
 
 ```
@@ -82,7 +82,7 @@ make clean
 * HRTEM raw images are 4096×4096 float32 (65 MB each; 26 GB for all 407). I bin them by 4 to
   1024×1024 (block mean for the image, majority vote for the mask) and **multiply the pixel size by
   4**, so physical sizes stay correct. The default build uses a deterministic, hash-ordered subset of
-  **100** images (`limit: 100`) so a fresh `just` run stays practical.
+  **30** images (`limit: 30`) so a fresh `just` run stays practical (about 4 GB of downloads in total: 2 GB HRTEM, 1.6 GB Co3O4, 0.1 GB EMPS).
 * Raw HRTEM and Co3O4 files are deleted right after they are processed, so peak disk use stays small.
 
 ---
@@ -200,11 +200,26 @@ The labels live in `annotations/emps_scale_labels.txt` (raw) and `annotations/em
 
 Coding assistants (Claude) helped write the code; I verified it as follows.
 
-* EMPS: full build, 465 images / 11,535 particles; a second run gave an identical content hash.
-* HRTEM and Co3O4: small test builds on real downloads (3 and 5 images); an overlay of the Co3O4 mask
-  on the image confirmed the label channel; HRTEM pixel sizes were compared with the header values.
-* The full `just` run through podman is recorded in `results/summary.json` once it has been done on the
-  target machine.
+* **Full build, 7 Oct 2026** (default config, `limit: 30`, in the course QEMU VM, about 24 minutes):
+  `wrote data/dataset.db {'co3o4': 256, 'emps': 465, 'hrtem': 30}`, 0 HRTEM files skipped.
+* Contents of that database (from `results/summary.json`):
+
+| Source | Images | With pixel size | Particles | Train / eval images |
+|---|---|---|---|---|
+| EMPS | 465 | 346 | 11,535 | 349 / 116 |
+| HRTEM | 30 | 30 | 641 | 17 / 13 |
+| Co3O4 | 256 | 0 | 3,790 | 203 / 53 |
+
+  The HRTEM eval share (13 of 30 images) is above the 20 % target because the split is by session
+  folder and 30 images cover only a few sessions. This evens out with a larger `limit`.
+* EMPS: a second build gave an identical content hash.
+* An overlay of the HRTEM mask on its image (`check_overlay.py`) lines up with the particles; the same
+  check on Co3O4 confirmed that channel 1 of the one-hot labels is the particle class.
+* HRTEM pixel sizes were compared with the header values on the first test downloads.
+
+Not yet checked: the full `just` run through podman/the Containerfile (the VM used
+`uv sync && make all`-style steps in a venv, because podman is not installed there), and runs with
+`limit` above 30.
 
 ## 9. Limitations
 
