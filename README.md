@@ -1,16 +1,18 @@
 # emparticles — one database for EM nanoparticle segmentation
 
-EMA 5937 *AI/ML for Materials Science*, Project A, **Part 1 (ETL)**. Author: Sakibul Islam Sazzad
+EMA 5937 *AI/ML for Materials Science*, Project A, **Parts 1 and 2 (ETL)**. Author: Sakibul Islam Sazzad
 (UCF, sakibsazzad[at]ucf[dot]edu).
 
 ```bash
-git clone https://github.com/SakibulIslamSazzad/emparticles_sazzad && cd emparticles_sazzad && just
-# or: tar xzvf emparticles.tar.gz && cd emparticles && just
+git clone https://github.com/SakibulIslamSazzad/emparticles_sazzad && cd emparticles_sazzad && just && just check
+# or: tar xzvf emparticles.tar.gz && cd emparticles && just && just check
 ```
 
-`just` runs `Justfile → Containerfile → Makefile → src/emparticles/*.py → data/dataset.db`, then builds
-the preliminary figures (`figures/*.png`) and `results/summary.json`. Without podman:
-`uv sync && make all`. The default build downloads about 4 GB (see §3) and needs network access.
+`just` runs `Justfile → Containerfile → Makefile → src/emparticles/*.py → data/dataset.db →
+data/inputs/{train,eval}.safetensors`, plus the preliminary figures (`figures/*.png`) and
+`results/summary.json`. `just check` audits the tensors (no leakage, folds, idempotency, loading).
+Without podman: `uv sync && make all && make check`. The default build downloads about 4 GB
+(see §3) and needs network access. **Part 2 (tensors for a model) is described in §10.**
 
 ---
 
@@ -82,7 +84,7 @@ make clean
 * HRTEM raw images are 4096×4096 float32 (65 MB each; 26 GB for all 407). I bin them by 4 to
   1024×1024 (block mean for the image, majority vote for the mask) and **multiply the pixel size by
   4**, so physical sizes stay correct. The default build uses a deterministic, hash-ordered subset of
-  **30** images (`limit: 30`) so a fresh `just` run stays practical (about 4 GB of downloads in total: 2 GB HRTEM, 1.6 GB Co3O4, 0.1 GB EMPS).
+  **30** images (`limit: 30`) so a fresh `just` run stays practical (about 4 GB of downloads in total: 2 GB HRTEM, 1.6 GB Co3O4, 0.1 GB EMPS). Raise `limit` for more HRTEM images; larger values only change the download size.
 * Raw HRTEM and Co3O4 files are deleted right after they are processed, so peak disk use stays small.
 
 ---
@@ -189,9 +191,10 @@ The labels live in `annotations/emps_scale_labels.txt` (raw) and `annotations/em
 | Instance ids with gaps | max id ≠ number of particles | count unique non-zero ids |
 | Binary masks | touching particles merge | `mask_kind = 'binary'`, documented as a lower bound |
 | HRTEM names not unique | same file name, different session | id includes the session folder |
-| HRTEM size | 65 MB per image | bin by 4, subset of 100, delete raw after use |
+| HRTEM size | 65 MB per image | bin by 4, subset of 30, delete raw after use |
 | Co3O4 pixel size | not in the files | stored as NULL + `range_only` |
 | LanceDB | crashed in the VM | switched to DuckDB |
+| DuckDB 2.0.0 crashed the VM | inside the container `import duckdb` died with exit code 132 (illegal instruction) on the course VM's virtual CPU; numpy, scipy, h5py etc. were fine | pinned `duckdb==1.5.6` in `pyproject.toml` (the version that works in the VM) and re-locked `uv.lock`; bump the pin only after testing on the target machine |
 | VM instability | disk I/O errors and the virtual network dropping about every 20–30 minutes while downloading | downloads retry with backoff for ~35 minutes; raw files cleaned as I go; builds done right after a reboot |
 
 ---
@@ -200,9 +203,8 @@ The labels live in `annotations/emps_scale_labels.txt` (raw) and `annotations/em
 
 Coding assistants (Claude) helped write the code; I verified it as follows.
 
-* **Full build, 7 Oct 2026** (default config, `limit: 30`, in the course QEMU VM, about 24 minutes):
+* **Part 1, full database build, 7 Oct 2026** (in the course QEMU VM, `limit: 30`, about 24 minutes):
   `wrote data/dataset.db {'co3o4': 256, 'emps': 465, 'hrtem': 30}`, 0 HRTEM files skipped.
-* Contents of that database (from `results/summary.json`):
 
 | Source | Images | With pixel size | Particles | Train / eval images |
 |---|---|---|---|---|
@@ -210,20 +212,85 @@ Coding assistants (Claude) helped write the code; I verified it as follows.
 | HRTEM | 30 | 30 | 641 | 17 / 13 |
 | Co3O4 | 256 | 0 | 3,790 | 203 / 53 |
 
-  The HRTEM eval share (13 of 30 images) is above the 20 % target because the split is by session
-  folder and 30 images cover only a few sessions. This evens out with a larger `limit`.
-* EMPS: a second build gave an identical content hash.
-* An overlay of the HRTEM mask on its image (`check_overlay.py`) lines up with the particles; the same
-  check on Co3O4 confirmed that channel 1 of the one-hot labels is the particle class.
-* HRTEM pixel sizes were compared with the header values on the first test downloads.
+* EMPS: a second build gave an identical content hash. Overlays of the HRTEM and Co3O4 masks on their
+  images line up with the particles (`check_overlay.py`).
+* **Part 2, full pipeline, 24 Oct 2026** (course VM, `limit: 30`, a fresh `just` through podman, then `just check`):
+  `train.safetensors` 2,556 tiles from 569 pictures, `eval.safetensors` 876 tiles from 182 pictures
+  (453 train and 134 eval groups, no overlap); tiles per fold `[506, 506, 490, 520, 534]`;
+  `ALL CHECKS PASSED`, including a byte-identical rebuild. The `safetensors.torch` + `DataLoader` check
+  is skipped inside the container because torch is an optional extra (the files are then read with `safetensors`).
+* I also broke things on purpose on a small synthetic three-source database (a group split over both
+  sides, a training tile copied into eval, a wrong group index) and each was caught.
 
-Not yet checked: the full `just` run through podman/the Containerfile (the VM used
-`uv sync && make all`-style steps in a venv, because podman is not installed there), and runs with
-`limit` above 30.
+Not checked: a run with a larger `limit`, and the check on a machine other than my VM.
 
 ## 9. Limitations
 
 * HRTEM and Co3O4 labels are binary, so particle counts and sizes of touching particles are biased.
 * Co3O4 has no per-image pixel size and no group information (one group per image).
-* The HRTEM default build is a subset and is binned by 4.
+* The HRTEM default build is a 30-image subset, binned by 4: few sessions, so the HRTEM eval share and folds are coarse.
 * 119 EMPS images have no usable scale and are `NULL` in nm columns.
+
+---
+
+## 10. Part 2: from the database to tensors
+
+`data/dataset.db` holds pictures as PNG BLOBs of different sizes and masks of different kinds (EMPS has
+instance ids, HRTEM and Co3O4 are binary). A model needs fixed-shape batches, so `src/emparticles/tensors.py`
+turns the database into two files, `data/inputs/train.safetensors` and `data/inputs/eval.safetensors`,
+plus `data/inputs/manifest.json` (every group, every picture, tile counts, file hashes).
+
+**Loading** (the files are standard safetensors, written without needing torch):
+
+```python
+from safetensors.torch import load_file
+from torch.utils.data import DataLoader, TensorDataset
+
+d = load_file("data/inputs/train.safetensors")
+loader = DataLoader(TensorDataset(d["x"], d["y"]), batch_size=16, shuffle=True)
+
+# 5-fold cross-validation, folds are made of whole groups:
+k = 0
+tr, va = d["fold"] != k, d["fold"] == k
+train_set = TensorDataset(d["x"][tr], d["y"][tr])
+val_set   = TensorDataset(d["x"][va], d["y"][va])
+```
+
+| tensor | dtype, shape (N tiles, T = 256) | meaning |
+|---|---|---|
+| `x` | float32 `[N,1,T,T]` | picture, stretched per picture to 0..1 |
+| `y` | uint8 `[N,1,T,T]` | 1 = particle, 0 = background |
+| `source` | uint8 `[N]` | 0 EMPS, 1 HRTEM, 2 Co3O4 |
+| `group` | int32 `[N]` | index into `manifest["groups"]` (paper / session / image) |
+| `image` | int32 `[N]` | index into `manifest["images"]` |
+| `fold` | int8 `[N]` | 0..4 in train, -1 in eval |
+| `pixel_size_nm` | float32 `[N]` | nm per pixel of the stored picture, NaN if unknown |
+| `origin` | int32 `[N,2]` | (row, col) of the tile in the stored picture |
+
+**No leakage.** The split is by group, never by row or tile: all pictures of one EMPS paper, one HRTEM
+session, or one Co3O4 image, and all tiles of a picture, are on the same side (`assign_split` hashes the
+group key with the seed; `tensors.py` refuses to write if a group is on both sides). Intensities are
+stretched per picture, so no statistic is shared between train and eval. The cross-validation folds are
+also built from whole groups of the train set, one source at a time so each fold contains every source
+that has enough groups.
+
+**Deterministic.** Every query has an `ORDER BY`; nothing uses random numbers except the seeded hash.
+Files are written to a temporary name and renamed, and two builds from the same database are
+byte-identical (`just check` rebuilds into a temporary folder and compares hashes).
+
+**What `just check` verifies** (`src/emparticles/check.py`, one line per check): tensor names, dtypes and
+shapes; value ranges; no group in both files and each group in exactly one fold; every picture's split
+agrees with the database; no identical (non-blank) tile in both files; folds non-empty; byte-identical
+rebuild; loading with `safetensors.torch` and a `DataLoader` batch when torch is installed.
+
+**Choices and limits.**
+* Pictures are cut into non-overlapping 256×256 tiles, centred; the border that does not fill a tile
+  (under 256 px per side) is dropped, and pictures smaller than a tile are skipped and listed in the
+  manifest. Tile size, folds, dtype and the stretch percentiles are in `config.yaml` (`tensors:`).
+* The label is semantic (particle vs background). Instance ids (EMPS only) stay in the database.
+* The pixel size differs between sources and is missing for 119 EMPS images and all of Co3O4: it is
+  given as `pixel_size_nm` (NaN if unknown), the pictures are not resampled to a common scale.
+* Co3O4 has one group per picture, so its split is the weakest against near-duplicate pictures.
+* EMPS pictures with a burnt-in scale-bar banner keep it in their bottom tile.
+* torch is optional (`uv sync --extra torch`); the container does not install it.
+* Size: about 0.9 GB in total at `float32` with the default 30 HRTEM images (set `dtype: float16` to halve it).
