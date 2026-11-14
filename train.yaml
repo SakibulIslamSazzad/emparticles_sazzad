@@ -1,0 +1,20 @@
+# Settings for training (src/emparticles/train.py). Kept apart from config.yaml on purpose:
+# changing a model setting re-runs only training, the figures and the report, not the database.
+seed: 42                   # model initialisation, crops, flips, the shuffled-masks control
+model:                     # data/inputs/*.safetensors -> results/results.json
+  base: 8                  # U-Net channels at full size (doubles at every down-sampling step)
+  depth: 3                 # number of down-sampling steps
+  epochs: 6
+  batch_size: 16
+  crop: 128                # training uses random crop x crop windows of the 256 x 256 tiles (faster)
+  lr: 0.003
+  weight_decay: 0.0001
+  val_fold: 0              # this cross-validation fold is the validation set, the other folds train
+  val_every: 2             # validate on every 2nd tile of the validation fold (speed)
+  eval_batch_size: 32
+  log_every: 40            # print the loss every N training steps
+  threads: 0               # 0 = torch default
+
+controls:
+  positive_tiles: 192      # training tiles for the positive control (a model that is handed the mask)
+  positive_epochs: 2

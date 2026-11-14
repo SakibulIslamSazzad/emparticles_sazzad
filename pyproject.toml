@@ -14,11 +14,18 @@ dependencies = [
     "h5py>=3.10",
     "ncempy>=1.11",
     "safetensors>=0.4",
+    "torch",
+    "typst>=0.11",
 ]
 
-[project.optional-dependencies]
-# only needed to load the tensors in your own training code (check.py uses it when present)
-torch = ["torch"]
+# torch comes from the CPU-only wheel index (about 200 MB instead of the multi-GB CUDA build)
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[tool.uv.sources]
+torch = [{ index = "pytorch-cpu" }]
 
 [build-system]
 requires = ["hatchling"]

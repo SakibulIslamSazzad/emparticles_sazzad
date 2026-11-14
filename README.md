@@ -1,6 +1,6 @@
 # emparticles — one database for EM nanoparticle segmentation
 
-EMA 5937 *AI/ML for Materials Science*, Project A, **Parts 1 and 2 (ETL)**. Author: Sakibul Islam Sazzad
+EMA 5937 *AI/ML for Materials Science*, Project A, **Parts 1 and 2 (ETL) and Model & Report Part I**. Author: Sakibul Islam Sazzad
 (UCF, sakibsazzad[at]ucf[dot]edu).
 
 ```bash
@@ -9,8 +9,10 @@ git clone https://github.com/SakibulIslamSazzad/emparticles_sazzad && cd emparti
 ```
 
 `just` runs `Justfile → Containerfile → Makefile → src/emparticles/*.py → data/dataset.db →
-data/inputs/{train,eval}.safetensors`, plus the preliminary figures (`figures/*.png`) and
-`results/summary.json`. `just check` audits the tensors (no leakage, folds, idempotency, loading).
+data/inputs/{train,eval}.safetensors → results/results.json → report/report.typ → results/report.pdf`,
+plus the preliminary figures (`figures/*.png`) and `results/summary.json`. Training is printed to the
+terminal (loss and validation AUC per epoch). `just check` audits the tensors (no leakage, folds,
+idempotency, loading). **Model and report: §11.**
 Without podman: `uv sync && make all && make check`. The default build downloads about 4 GB
 (see §3) and needs network access. **Part 2 (tensors for a model) is described in §10.**
 
@@ -294,3 +296,39 @@ rebuild; loading with `safetensors.torch` and a `DataLoader` batch when torch is
 * EMPS pictures with a burnt-in scale-bar banner keep it in their bottom tile.
 * torch is optional (`uv sync --extra torch`); the container does not install it.
 * Size: about 0.9 GB in total at `float32` with the default 30 HRTEM images (set `dtype: float16` to halve it).
+
+---
+
+## 11. Model & Report Part I: training, controls and the report
+
+`just` ends with `results/report.pdf`. Nothing is typed into the report by hand.
+
+```
+data/inputs/{train,eval}.safetensors
+   └─ src/emparticles/train.py  (settings: train.yaml)  ─►  results/results.json, results/model.safetensors
+        └─ src/emparticles/plots.py  ─►  figures/{training_curve,roc,by_source,examples}.png
+             └─ report/report.typ  (reads results.json + figures)  ─►  results/report.pdf
+```
+
+* **Model** (`model.py`): a small U-Net (about 0.1 M parameters, `model.base: 8`), trained on random
+  128 × 128 crops of the 256 × 256 tiles with flips, loss = BCE + soft Dice, AdamW. It is small on purpose:
+  it has to train on a CPU inside the course VM in a few minutes. It does not need to be good yet.
+* **Validation and test:** the training tiles of cross-validation fold `model.val_fold` (0) are the
+  validation set (groups never straddle folds); the epoch with the best validation AUC is kept.
+  `eval.safetensors` is the held-out TEST set and is used only for the final numbers.
+* **Metrics** (pixel-wise, from logit histograms so memory stays small): ROC AUC, average precision,
+  IoU, Dice, precision, recall at probability 0.5; overall and per source.
+* **Controls**, scored on the same test set:
+  * *negative, constant score*: the training foreground rate for every pixel, AUC must be 0.5;
+  * *negative, shuffled masks*: the trained model against the masks of other test tiles, AUC about 0.5;
+  * *positive, mask given*: a second U-Net that receives the true mask as an extra channel, AUC must be near 1.
+  The report prints "passed / FAILED" for each of these from the numbers.
+* **Re-running:** `make` knows the dependencies. A new database or new tensor settings re-run the tensors,
+  training, figures and report. Changing only `train.yaml` (epochs, model size, ...) re-runs training, the
+  figures and the report but not the database. If nothing changed, `make` does nothing.
+  The report states the sha256 of the tensor files it was made from.
+* **torch** comes from the CPU-only wheel index (`pyproject.toml`), and Typst from the `typst` Python package
+  (no separate install). The container also has a font for the report.
+* **Limits:** the score is not optimised (that is Part II); tiles of the three sources are mixed in one model
+  (the per-source table shows where it is weak); HRTEM and Co3O4 labels are binary masks; training uses
+  random crops and flips only; the metrics are pixel-wise, not per particle.
