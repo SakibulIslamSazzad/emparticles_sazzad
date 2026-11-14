@@ -1,7 +1,11 @@
 // Model & Report Part I. Every number below is read from results/results.json, every figure
 // from figures/: nothing is typed in by hand, so a new run of `just` rewrites the whole report.
 #let r = json("/results/results.json")
-#let f(x, d: 3) = str(calc.round(x, digits: d))
+#let f(x, d: 3) = {
+  let s = str(calc.round(x, digits: d))
+  let parts = s.split(".")
+  if parts.len() == 1 { s + "." + "0" * d } else { s + "0" * (d - parts.at(1).len()) }
+}
 #let t = r.test
 #let m = t.model.overall
 #let neg = t.dummy.overall
@@ -76,6 +80,24 @@ validation AUC (epoch #r.model.best_epoch) is kept. The test set is not used for
   figure(image("/figures/by_source.png", width: 100%), caption: [AUC and IoU per source (test).]),
 )
 
+#let bs = t.model.by_source
+#let ranked = bs.pairs().sorted(key: p => p.at(1).auc)
+#let worst = ranked.first()
+#let best = ranked.last()
+
+#figure(
+  table(columns: (auto, auto, auto, auto, auto, auto), align: (left, right, right, right, right, right),
+    table.header[*source (test)*][*AUC*][*AP*][*IoU*][*recall*][*foreground*],
+    ..bs.pairs().map(p => (p.at(0), f(p.at(1).auc), f(p.at(1).ap), f(p.at(1).iou), f(p.at(1).recall),
+      f(p.at(1).foreground_rate * 100, d: 1) + " %")).flatten(),
+  ),
+  caption: [The trained model on each source separately (same test tiles as above).],
+)
+
+The model separates particles best on *#best.at(0)* (AUC #f(best.at(1).auc)) and worst on
+*#worst.at(0)* (AUC #f(worst.at(1).auc)); the gap of #f(best.at(1).auc - worst.at(1).auc) AUC is the clearest
+place to improve in Part II.
+
 #figure(image("/figures/examples.png", width: 70%),
   caption: [One test tile per source: picture, true mask and predicted probability.])
 
@@ -90,6 +112,19 @@ The controls say whether the numbers above can be trusted.
 - Positive control: a second U-Net that gets the true mask as an extra input channel must score near 1
   (#f(pos.auc)): #ok(pos.auc > 0.95). If this failed, training or scoring would be broken.
 - The trained model beats the negative controls by #f(m.auc - neg.auc) AUC: #ok(m.auc > neg.auc + 0.05).
+
+= Limits and next steps
+
+- The model is deliberately small (#r.model.parameters parameters, #r.model.epochs epochs, #r.model.crop × #r.model.crop
+  crops); #if r.model.best_epoch == r.model.epochs [validation AUC was still improving at the last epoch (best epoch
+  #r.model.best_epoch of #r.model.epochs), so a longer run is the first thing to try.] else [validation AUC peaked at
+  epoch #r.model.best_epoch of #r.model.epochs, so more epochs alone will not help.]
+- At probability 0.5 the model reaches an IoU of #f(m.iou) and a recall of #f(m.recall): a better threshold or
+  a loss weighted towards particles may help, and the AUC does not depend on the threshold.
+- All sources are mixed in one model. HRTEM and Co3O4 have binary masks only, so touching particles cannot be
+  told apart; the metrics are pixel-wise, not per particle.
+- The test set has #r.data.test_tiles tiles from #r.data.test_groups groups. A confidence interval over groups
+  (not only over pixels) would show how stable the numbers are.
 
 = How this report is produced
 
