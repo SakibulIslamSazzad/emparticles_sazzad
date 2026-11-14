@@ -1,0 +1,468 @@
+# Generated from your review table: rows where the red line matched the bar AND you read the label
+1 200   # 200 nm, bar 71 px
+4 10   # 10 nm, bar 70 px
+5 100   # 100 nm, bar 44 px
+6 200   # 200 nm, bar 102 px
+7 200   # 200 nm, bar 136 px
+8 20   # 20 nm, bar 59 px
+9 10   # 10 nm, bar 57 px
+11 100   # 100 nm, bar 67 px
+19 20   # 20 nm, bar 46 px
+21 25   # 25 nm, bar 97 px
+22 1000   # 1 um, bar 114 px
+23 20   # 20 nm, bar 65 px
+24 1000   # 1.0 um, bar 176 px
+25 200   # 200 nm, bar 82 px
+26 2000   # 2 um, bar 266 px
+28 100   # 100 nm, bar 155 px
+29 50   # 50 nm, bar 221 px
+30 200   # 200 nm, bar 186 px
+32 3000   # 3 um, bar 244 px
+33 100   # 100 nm, bar 63 px
+36 1000   # 1 um, bar 92 px
+38 100   # 100 nm, bar 139 px
+45 1000   # 1 um, bar 73 px
+48 100   # 100 nm, bar 77 px
+52 100   # 100 nm, bar 65 px
+55 200   # 200 nm, bar 120 px
+59 10   # 10 nm, bar 93 px
+62 200   # 200 nm, bar 96 px
+65 50   # 50 nm, bar 70 px
+66 50   # 50 nm, bar 45 px
+68 200   # 200 nm, bar 102 px
+72 200   # 200 nm, bar 88 px
+74 200   # 200 nm, bar 161 px
+75 10000   # 10 um, bar 117 px
+77 100   # 100 nm, bar 64 px
+80 20   # 20 nm, bar 34 px
+81 100   # 100 nm, bar 80 px
+83 200   # 200 nm, bar 60 px
+84 1000   # 1 um, bar 122 px
+86 20   # 20 nm, bar 120 px
+87 100   # 100 nm, bar 119 px
+90 1000   # 1.0 um, bar 174 px
+92 1800   # 1.8 um, bar 30 px
+96 50   # 50 nm, bar 86 px
+100 50   # 50 nm, bar 78 px
+101 200000   # 200 um, bar 83 px
+103 50   # 50 nm, bar 106 px
+105 20   # 20 nm, bar 24 px
+109 100   # 100 nm, bar 90 px
+110 200   # 200 nm, bar 129 px
+111 1000   # 1 um, bar 144 px
+112 200   # 0.2 um, bar 111 px
+114 200   # 200 nm, bar 142 px
+116 10   # 10 nm, bar 23 px
+123 5000   # 5 um, bar 118 px
+127 100   # 100 nm, bar 107 px
+129 50   # 50 nm, bar 120 px
+134 200   # 0.2 um, bar 55 px
+136 50   # 50 nm, bar 41 px
+137 20   # 20 nm, bar 83 px
+144 20   # 20 nm, bar 47 px
+145 50   # 50 nm, bar 56 px
+146 200   # 200 nm, bar 109 px
+149 50   # 50 nm, bar 89 px
+151 5   # 5 nm, bar 57 px
+157 100   # 100 nm, bar 124 px
+158 50   # 50 nm, bar 114 px
+160 500   # 500 nm, bar 165 px
+162 100   # 100 nm, bar 82 px
+164 200   # 200 nm, bar 240 px
+167 100   # 100 nm, bar 129 px
+169 50   # 50 nm, bar 150 px
+171 500   # 0.5 um, bar 73 px
+172 500   # 0.5 um, bar 143 px
+176 1000   # 1 um, bar 122 px
+177 50   # 50 nm, bar 115 px
+178 100   # 100 nm, bar 103 px
+179 100   # 100 nm, bar 127 px
+180 100   # 100 nm, bar 73 px
+181 1000   # 1 um, bar 66 px
+182 50   # 50 nm, bar 87 px
+187 20   # 20 nm, bar 138 px
+189 50   # 50 nm, bar 64 px
+190 100   # 100 nm, bar 118 px
+193 200   # 0.2 um, bar 74 px
+196 10   # 10 nm, bar 52 px
+197 10   # 10 nm, bar 66 px
+198 50   # 50 nm, bar 86 px
+203 1000   # 1 um, bar 154 px
+204 1000   # 1 um, bar 72 px
+205 50   # 50 nm, bar 68 px
+207 1000   # 1.0 um, bar 175 px
+213 300   # 300 nm, bar 49 px
+217 1000   # 1.0 um, bar 191 px
+218 200   # 200 nm, bar 139 px
+219 50   # 50 nm, bar 87 px
+223 500   # 500 nm, bar 73 px
+225 100   # 100 nm, bar 142 px
+226 200   # 200 nm, bar 153 px
+227 50   # 50 nm, bar 56 px
+228 200   # 200 nm, bar 93 px
+229 200   # 200 nm, bar 115 px
+230 100   # 100 nm, bar 154 px
+231 1000   # 1 um, bar 43 px
+234 500   # 0.5 um, bar 204 px
+237 100   # 100 nm, bar 101 px
+238 200   # 200 nm, bar 60 px
+242 100   # 100 nm, bar 123 px
+245 500   # 500 nm, bar 116 px
+252 1000   # 1 um, bar 57 px
+255 100   # 100 nm, bar 158 px
+258 100   # 100 nm, bar 122 px
+261 100   # 100 nm, bar 139 px
+264 200   # 200 nm, bar 119 px
+265 40   # 40 nm, bar 145 px
+268 20   # 20 nm, bar 122 px
+271 1000   # 1 um, bar 110 px
+272 500   # 500 nm, bar 31 px
+275 500   # 500 nm, bar 122 px
+290 200   # 200 nm, bar 87 px
+291 200000   # 200 um, bar 129 px
+296 50   # 50 nm, bar 118 px
+297 500   # 500 nm, bar 40 px
+298 100   # 100 nm, bar 42 px
+299 200   # 200 nm, bar 46 px
+301 1000   # 1 um, bar 172 px
+302 100   # 100 nm, bar 135 px
+303 500   # 0.5 um, bar 73 px
+308 1000   # 1 um, bar 68 px
+311 200   # 200 nm, bar 59 px
+312 20   # 20 nm, bar 101 px
+316 40   # 40 nm, bar 93 px
+317 500   # 500 nm, bar 55 px
+320 200   # 200 nm, bar 125 px
+321 20   # 20 nm, bar 140 px
+322 100   # 100 nm, bar 138 px
+323 200   # 200 nm, bar 117 px
+324 50000   # 50 um, bar 125 px
+326 1000   # 1 um, bar 120 px
+327 100   # 100 nm, bar 136 px
+329 500   # 500 nm, bar 176 px
+330 50   # 50 nm, bar 105 px
+333 200   # 200 nm, bar 176 px
+338 50   # 50 nm, bar 81 px
+339 1000   # 1 um, bar 29 px
+341 200   # 200 nm, bar 174 px
+342 200   # 200 nm, bar 140 px
+343 1000   # 1 um, bar 101 px
+344 200   # 200 nm, bar 92 px
+351 1000   # 1.0 um, bar 175 px
+352 1000   # 1000 nm, bar 203 px
+353 500   # 0.5 um, bar 186 px
+354 50   # 50 nm, bar 147 px
+357 1000   # 1 um, bar 106 px
+359 500   # 500 nm, bar 145 px
+362 500   # 500 nm, bar 121 px
+364 20   # 20 nm, bar 126 px
+367 1000   # 1.0 um, bar 175 px
+369 500   # 500 nm, bar 155 px
+372 20   # 20 nm, bar 84 px
+373 100   # 100 nm, bar 254 px
+378 1000   # 1 um, bar 137 px
+381 200   # 200 nm, bar 174 px
+385 100   # 100 nm, bar 74 px
+386 40   # 40 nm, bar 27 px
+387 100   # 100 nm, bar 93 px
+388 200   # 200 nm, bar 109 px
+389 5000   # 5 um, bar 223 px
+390 500   # 500 nm, bar 249 px
+391 500   # 500 nm, bar 153 px
+393 300   # 300 nm, bar 55 px
+395 50   # 50 nm, bar 195 px
+396 500   # 500 nm, bar 138 px
+398 200   # 200 nm, bar 64 px
+399 200   # 200 nm, bar 51 px
+400 200   # 200 nm, bar 126 px
+403 50   # 50 nm, bar 60 px
+411 200   # 200 nm, bar 147 px
+414 1000   # 1.0 um, bar 174 px
+416 200   # 0.2 um, bar 48 px
+418 100   # 100 nm, bar 155 px
+419 100   # 100 nm, bar 181 px
+420 200   # 200 nm, bar 194 px
+421 500   # 500 nm, bar 59 px
+422 5   # 5 nm, bar 32 px
+424 200   # 200 nm, bar 44 px
+425 50   # 50 nm, bar 57 px
+435 100   # 100 nm, bar 76 px
+437 500   # 0.5 um, bar 206 px
+442 1000   # 1.0 um, bar 175 px
+443 1000   # 1 um, bar 263 px
+444 50   # 50 nm, bar 78 px
+446 20   # 20 nm, bar 44 px
+447 20000   # 20 um, bar 92 px
+448 50   # 50 nm, bar 116 px
+449 100   # 100 nm, bar 43 px
+450 50   # 50 nm, bar 79 px
+454 200   # 200 nm, bar 120 px
+456 50   # 50 nm, bar 114 px
+457 20   # 20 nm, bar 48 px
+461 100   # 100 nm, bar 75 px
+462 1000   # 1 um, bar 138 px
+463 500   # 500 nm, bar 57 px
+464 200   # 200 nm, bar 97 px
+# images where you saw no readable value: pixel size stays empty
+2 x   # no value to read: dont see any scale bar
+3 x   # no value to read: dont see text
+13 x   # no value to read: dont see text
+14 x   # no value to read: red bar is striking text
+16 x   # bar matches but no text to read
+17 x   # no value to read: no text, no scale bar
+18 x   # bar matches but no text to read
+20 x   # no value to read: no text, no scale bar
+27 x   # no value to read: no text, no scale bar
+35 x   # bar matches but no text to read
+40 x   # no value to read: see grey scale bar
+46 x   # bar matches but no text to read
+50 x   # bar matches but no text to read
+58 x   # no value to read: dont see text
+64 x   # no value to read: i see grey scale bar, not text
+95 x   # no value to read: i see grey scale bar but no text
+97 x   # no value to read: white scale bar red bar is not matching 
+108 x   # no value to read: scale bar is dashed white line, red bar 
+125 x   # no value to read: i see white scale bar
+130 x   # bar matches but no text to read
+138 x   # bar matches but no text to read
+147 x   # no value to read: red bar is not the scale bar
+185 x   # no value to read: red bar longer that white scale bar
+199 x   # no value to read: red bar is longer than black scale bar
+215 x   # bar matches but no text to read
+240 x   # no value to read: red bar is longer than white scale bar
+253 x   # no value to read: red bar is shifted to left from the whit
+267 x   # bar matches but no text to read
+273 x   # bar matches but no text to read
+274 x   # no value to read: red bar is missing white scale bar
+279 x   # bar matches but no text to read
+280 x   # no value to read: i see grey scale bar
+305 x   # no value to read: i see grey white scale bar
+306 x   # no value to read: red bar is missing the whole white scale
+335 x   # no value to read: red bar is not in correct place
+346 x   # no value to read: red bar is longer than black scale bar
+350 x   # no value to read: i see grey scale bar
+361 x   # bar matches but no text to read
+365 x   # bar matches but no text to read
+377 x   # bar matches but no text to read
+379 x   # bar matches but no text to read
+380 x   # no value to read: i see black bar below black text
+401 x   # no value to read: i see white scale bar
+402 x   # no value to read: red bar is longer than white scale bar
+404 x   # bar matches but no text to read
+410 x   # bar matches but no text to read
+428 x   # bar matches but no text to read
+429 x   # bar matches but no text to read
+430 x   # bar matches but no text to read
+439 x   # bar matches but no text to read
+# round 2 labels (value + bar px)
+10 100nm px=87   # bottom, red candidate 1
+12 200nm px=95   # bottom, red candidate 1
+15 50nm px=85   # bottom, red candidate 1
+31 10um px=65   # banner, banner mark
+34 100nm px=127   # bottom, red candidate 1
+37 x   # round 2: no scale bar / no readable value
+39 50nm px=62   # banner, red candidate 1
+41 2um px=182   # banner, red candidate 1
+42 x   # round 2: no scale bar / no readable value
+43 100nm px=49   # bottom, red candidate 1
+44 500nm px=141   # bottom, bottom mark
+47 500nm px=142   # bottom, red candidate 1
+49 1um px=15   # bottom, red candidate 1
+51 1um px=99   # banner, red candidate 1
+53 50nm px=90   # whole, whole mark
+54 200nm px=123   # bottom, red candidate 1
+56 100nm px=149   # bottom, red candidate 1
+57 1um px=85   # bottom, bottom mark
+60 200nm px=230   # banner, banner mark
+61 x   # round 2: no scale bar / no readable value
+63 1um px=102   # banner, red candidate 1
+67 100nm px=149   # bottom, bottom mark
+69 x   # round 2: no scale bar / no readable value
+70 100nm px=130   # bottom, bottom mark
+71 1um px=161   # bottom, red candidate 1
+73 x   # round 2: no scale bar / no readable value
+76 100nm px=49   # bottom, red candidate 1
+78 x   # round 2: no scale bar / no readable value
+79 200nm px=249   # banner, banner mark
+82 10um px=132   # bottom, bottom mark
+85 100nm px=55   # bottom, bottom mark
+88 2um px=53   # banner, banner mark
+89 100nm px=69   # bottom, red candidate 1
+91 10um px=60   # banner, banner mark
+93 200nm px=138   # banner, red candidate 1
+94 1um px=59   # bottom, red candidate 1
+98 x   # round 2: no scale bar / no readable value
+99 x   # round 2: no scale bar / no readable value
+102 1um px=64   # bottom, red candidate 1
+104 100nm px=69   # bottom, bottom mark
+106 500nm px=273   # banner, banner mark
+107 500nm px=134   # bottom, red candidate 1
+113 x   # round 2: no scale bar / no readable value
+115 200nm px=117   # bottom, red candidate 1
+117 50nm px=115   # bottom, red candidate 1
+118 50nm px=191   # bottom, red candidate 1
+119 x   # round 2: no scale bar / no readable value
+120 100nm px=62   # banner, banner mark
+121 100nm px=29   # banner, banner mark
+122 100nm px=67   # bottom, bottom mark
+124 x   # round 2: no scale bar / no readable value
+126 200nm px=186   # bottom, bottom mark
+128 100nm px=15   # bottom, red candidate 1
+131 1um px=150   # bottom, bottom mark
+132 2um px=244   # bottom, red candidate 1
+133 50nm px=310   # bottom, red candidate 1
+135 100nm px=70   # banner, banner mark
+139 x   # round 2: no scale bar / no readable value
+140 500nm px=273   # banner, banner mark
+141 60nm px=60   # bottom, bottom mark
+142 200nm px=136   # bottom, bottom mark
+143 x   # round 2: no scale bar / no readable value
+148 1um px=93   # bottom, bottom mark
+150 200nm px=211   # bottom, red candidate 1
+152 x   # round 2: no scale bar / no readable value
+153 5um px=253   # banner, banner mark
+154 200nm px=80   # bottom, red candidate 1
+155 x   # round 2: no scale bar / no readable value
+156 x   # round 2: no scale bar / no readable value
+159 x   # round 2: no scale bar / no readable value
+161 1um px=143   # banner, red candidate 1
+163 x   # round 2: no scale bar / no readable value
+165 200nm px=317   # banner, red candidate 1
+166 50nm px=70   # bottom, red candidate 1
+168 20nm px=31   # bottom, red candidate 1
+170 x   # round 2: no scale bar / no readable value
+173 x   # round 2: no scale bar / no readable value
+174 2um px=18   # bottom, red candidate 1
+175 x   # round 2: no scale bar / no readable value
+183 500nm px=83   # banner, red candidate 1
+184 x   # round 2: no scale bar / no readable value
+186 100nm px=317   # bottom, bottom mark
+188 100nm px=105   # banner, banner mark
+191 100nm px=118   # bottom, red candidate 1
+192 20nm px=86   # bottom, bottom mark
+194 35nm px=200   # bottom, bottom mark
+195 2um px=244   # bottom, red candidate 1
+200 x   # round 2: no scale bar / no readable value
+201 10nm px=18   # bottom, red candidate 1
+202 x   # round 2: no scale bar / no readable value
+206 2um px=85   # bottom, bottom mark
+208 500nm px=167   # bottom, bottom mark
+209 x   # round 2: no scale bar / no readable value
+210 500nm px=171   # bottom, bottom mark
+211 x   # round 2: no scale bar / no readable value
+212 x   # round 2: no scale bar / no readable value
+214 2um px=91   # banner, banner mark
+216 100nm px=93   # bottom, red candidate 1
+220 100nm px=40   # bottom, red candidate 1
+221 50nm px=91   # banner, banner mark
+222 x   # round 2: no scale bar / no readable value
+224 200nm px=107   # bottom, red candidate 1
+232 2um px=144   # bottom, red candidate 1
+233 x   # round 2: no scale bar / no readable value
+235 x   # round 2: no scale bar / no readable value
+236 x   # round 2: no scale bar / no readable value
+239 1um px=107   # bottom, bottom mark
+241 10nm px=15   # bottom, red candidate 1
+243 500nm px=59   # bottom, bottom mark
+244 200nm px=108   # bottom, red candidate 1
+246 2um px=187   # bottom, bottom mark
+247 3um px=302   # bottom, red candidate 1
+248 1um px=172   # banner, banner mark
+249 200um px=45   # banner, banner mark
+250 50um px=174   # banner, banner mark
+251 x   # round 2: no scale bar / no readable value
+254 x   # round 2: no scale bar / no readable value
+256 x   # round 2: no scale bar / no readable value
+257 x   # round 2: no scale bar / no readable value
+259 x   # round 2: no scale bar / no readable value
+260 10nm px=17   # bottom, red candidate 1
+262 x   # round 2: no scale bar / no readable value
+263 100nm px=158   # banner, banner mark
+266 100nm px=77   # bottom, red candidate 1
+269 200nm px=98   # bottom, bottom mark
+270 x   # round 2: no scale bar / no readable value
+276 x   # round 2: no scale bar / no readable value
+277 500nm px=272   # banner, banner mark
+278 x   # round 2: no scale bar / no readable value
+281 2um px=62   # bottom, red candidate 1
+282 500nm px=212   # bottom, bottom mark
+283 10um px=176   # banner, banner mark
+284 5um px=256   # bottom, red candidate 1
+285 50nm px=76   # bottom, bottom mark
+286 500nm px=15   # bottom, red candidate 1
+287 1um px=62   # banner, banner mark
+288 200nm px=124   # bottom, red candidate 1
+289 200nm px=138   # bottom, bottom mark
+292 x   # round 2: no scale bar / no readable value
+293 x   # round 2: no scale bar / no readable value
+294 x   # round 2: no scale bar / no readable value
+295 1um px=300   # bottom, red candidate 1
+300 20nm px=31   # bottom, bottom mark
+304 10um px=263   # banner, banner mark
+307 200nm px=242   # banner, red candidate 1
+309 x   # round 2: no scale bar / no readable value
+310 2um px=86   # banner, red candidate 1
+313 3um px=121   # bottom, bottom mark
+314 2um px=99   # banner, banner mark
+315 x   # round 2: no scale bar / no readable value
+318 100nm px=95   # whole, whole mark
+319 1000um px=191   # bottom, bottom mark
+325 x   # round 2: no scale bar / no readable value
+328 x   # round 2: no scale bar / no readable value
+331 x   # round 2: no scale bar / no readable value
+332 x   # round 2: no scale bar / no readable value
+334 100um px=36   # bottom, bottom mark
+336 x   # round 2: no scale bar / no readable value
+337 x   # round 2: no scale bar / no readable value
+340 100nm px=215   # bottom, bottom mark
+345 x   # round 2: no scale bar / no readable value
+347 x   # round 2: no scale bar / no readable value
+348 20nm px=84   # bottom, red candidate 1
+349 5um px=146   # bottom, bottom mark
+355 4um px=280   # bottom, red candidate 1
+356 100um px=408   # bottom, red candidate 1
+358 500um px=191   # bottom, bottom mark
+360 20nm px=156   # bottom, bottom mark
+363 x   # round 2: no scale bar / no readable value
+366 x   # round 2: no scale bar / no readable value
+368 x   # round 2: no scale bar / no readable value
+370 100nm px=130   # bottom, red candidate 1
+371 x   # round 2: no scale bar / no readable value
+374 2um px=238   # banner, banner mark
+375 1um px=21   # bottom, red candidate 1
+376 20um px=152   # bottom, bottom mark
+382 30nm px=94   # bottom, red candidate 1
+383 x   # round 2: no scale bar / no readable value
+384 200nm px=229   # bottom, red candidate 1
+392 200nm px=22   # bottom, red candidate 1
+394 2um px=29   # bottom, red candidate 1
+397 500nm px=209   # bottom, red candidate 1
+405 200nm px=100   # bottom, red candidate 1
+406 x   # round 2: no scale bar / no readable value
+407 50nm px=90   # bottom, red candidate 1
+408 x   # round 2: no scale bar / no readable value
+409 5um px=73   # bottom, bottom mark
+412 200nm px=56   # bottom, red candidate 1
+413 100nm px=60   # bottom, red candidate 1
+415 100nm px=115   # bottom, red candidate 1
+417 200um px=249   # banner, banner mark
+423 x   # round 2: no scale bar / no readable value
+426 50um px=265   # banner, banner mark
+427 5um px=176   # banner, banner mark
+431 20nm px=96   # bottom, red candidate 1
+432 1um px=59   # bottom, red candidate 1
+433 x   # round 2: no scale bar / no readable value
+434 x   # round 2: no scale bar / no readable value
+436 200nm px=75   # bottom, red candidate 1
+438 x   # round 2: no scale bar / no readable value
+440 100nm px=124   # bottom, bottom mark
+441 x   # round 2: no scale bar / no readable value
+445 500nm px=272   # banner, banner mark
+451 100um px=262   # banner, banner mark
+452 20nm px=90   # bottom, bottom mark
+453 x   # round 2: no scale bar / no readable value
+455 50nm px=73   # bottom, bottom mark
+458 x   # round 2: no scale bar / no readable value
+459 x   # round 2: no scale bar / no readable value
+460 x   # round 2: no scale bar / no readable value
+465 200nm px=90   # bottom, red candidate 1

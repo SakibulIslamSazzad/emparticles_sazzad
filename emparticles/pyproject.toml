@@ -1,0 +1,35 @@
+[project]
+name = "emparticles"
+version = "0.1.0"
+description = "EMA 5937 Project A: EM nanoparticle images, one reproducible database"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+dependencies = [
+    "duckdb==1.5.6",
+    "matplotlib>=3.9",
+    "numpy>=1.26",
+    "pillow>=10",
+    "pyyaml>=6",
+    "scipy>=1.11",
+    "h5py>=3.10",
+    "ncempy>=1.11",
+    "safetensors>=0.4",
+    "torch",
+    "typst>=0.11",
+]
+
+# torch comes from the CPU-only wheel index (about 200 MB instead of the multi-GB CUDA build)
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[tool.uv.sources]
+torch = [{ index = "pytorch-cpu" }]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/emparticles"]
